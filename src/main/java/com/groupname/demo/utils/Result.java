@@ -10,6 +10,11 @@ public class Result<T> {
         this.message=message;
         this.object=object;
     }
+    public Result(boolean success,String message){
+        this.success=success;
+        this.message=message;
+        this.object=null;
+    }
     public boolean isSuccess(){
         return this.success;
     }
@@ -28,6 +33,6 @@ public class Result<T> {
 
     @Override
     public String toString(){
-        return this.success + " " + this.message;
+        return this.success + " " + this.message + " "+ object;
     }
 }
