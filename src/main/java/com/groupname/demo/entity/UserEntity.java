@@ -81,7 +81,7 @@ public class UserEntity implements Serializable {
 
 
     @Basic
-    @Column(name = "majorNo")
+    @Column(name = "majorno")
     public String getMajorNo() {
         return majorNo;
     }
@@ -90,7 +90,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "userStatus")
+    @Column(name = "userstatus")
     public Integer getUserStatus() {
         return userStatus;
     }
