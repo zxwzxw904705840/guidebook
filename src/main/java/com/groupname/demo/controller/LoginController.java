@@ -28,8 +28,8 @@ public class LoginController {
 
     @RequestMapping(value = "register",method = RequestMethod.POST)
     public ResponseEntity<Result> register(@RequestBody Map<String,Object> params){
-        UserEntity userEntity = JSON.parseObject(JSON.toJSONString(params.get("user")),UserEntity.class);
-        Result result = loginService.register(userEntity);
+        UserEntity user = JSON.parseObject(JSON.toJSONString(params.get("user")),UserEntity.class);
+        Result result = loginService.register(user);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

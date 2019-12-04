@@ -35,9 +35,28 @@ public class LoginService {
         return new Result<>(true,Consts.LOGIN_SUCCESS,userEntity);
     }
 
-    public Result<Object> register(UserEntity userEntity){
-        System.out.println(userEntity);
-        return new Result<>(true,Consts.REGISTER_SUCCESS);
+    public Result<Object> register(UserEntity user){
+        Result result = checkUser(user);
+        if(!result.isSuccess()){
+            return result;
+        }
+        /*
+        如果是学生，直接通过注册
+         */
+        if(user.getCharacters()==0){
+            user.setUserStatus(0);
+            userRepository.save(user);
+            return new Result<>(true,Consts.REGISTER_SUCCESS);
+        }
+        /*
+        如果是教师，加入审核队列
+         */
+        user.setUserStatus(1);
+        userRepository.save(user);
+        /*
+        TODO:加入审核队列
+         */
+        return new Result<>(true,Consts.REGISTER_WAITING_FOR_REVIEW);
     }
 
     private Result<Object> checkUser(UserEntity user){
@@ -59,14 +78,29 @@ public class LoginService {
         if(user.getPassword().length()>16){
             return new Result<>(false,Consts.PASSWORD_TOO_LONG);
         }
-        if(user.getCharacters()!=0||user.getCharacters()!=1){
+        if(user.getCharacters()!=0&&user.getCharacters()!=1){
             return new Result<>(false,Consts.REGISTER_FAIL);
         }
         if(user.getUserName()==null||user.getUserName().equals("")){
             return new Result<>(false,Consts.USERNAME_IS_EMPTY);
         }
+        if(user.getPhone()==null||user.getPhone().equals("")){
+            return new Result<>(false,Consts.PHONE_IS_EMPTY);
+        }
+        if(user.getPhone().length()!=11){
+            return new Result<>(false,Consts.ILLEGAL_TELEPHONE);
+        }
+        try{
 
-
-        return new Result<>(true,Consts.REGISTER_SUCCESS);
+            System.out.println(Integer.parseInt("123456789"));
+            //Integer.parseInt(user.getPhone());
+        }catch (Exception e){
+            return new Result<>(false,Consts.ILLEGAL_TELEPHONE);
+        }
+        UserEntity userEntity = userRepository.findByUserNo(user.getUserNo());
+        if(userEntity!=null && userEntity.getUserStatus()!=2){
+            return new Result<>(false,Consts.USERNO_EXISTS);
+        }
+        return new Result<>(true,Consts.ACCOUNT_CAN_USE);
     }
 }
