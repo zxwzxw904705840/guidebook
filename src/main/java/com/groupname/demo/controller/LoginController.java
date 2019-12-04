@@ -29,6 +29,7 @@ public class LoginController {
             characters = -1;
         }
         Result result = loginService.Login(userNo,password,characters);
+        
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
