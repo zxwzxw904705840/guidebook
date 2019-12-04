@@ -17,5 +17,6 @@ public class Consts {
     public static final String ILLEGAL_TELEPHONE = "不合法的手机号！";
     public static final String PHONE_IS_EMPTY = "手机号不能为空";
     public static final String REGISTER_FAIL = "注册失败！";
+    public static final String ACCOUNT_CAN_USE = "账户可以使用";
 
 }
