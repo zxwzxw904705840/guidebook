@@ -22,15 +22,8 @@ public class LoginController {
     public ResponseEntity<Result> login(@RequestBody Map<String,Object> params){
         String userNo = params.get("userNo").toString();
         String password = params.get("password").toString();
-        Integer characters;
-        try {
-            characters = Integer.valueOf(params.get("characters").toString());
-        }catch (Exception e){
-            characters = -1;
-        }
-        Result result = loginService.Login(userNo,password,characters);
-        
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        Result result = loginService.Login(userNo,password);
+        return ResponseEntity.ok(result);
     }
 
     @RequestMapping(value = "register",method = RequestMethod.POST)

@@ -26,13 +26,13 @@ public class TestLogin {
     @Test
     public void testLogin(){
         ArrayList<Map<String, Object>> data= new ArrayList<>();
-        data.add(getParams("m10086","123456","2"));
-        data.add(getParams("m10086","123457","2"));
-        data.add(getParams("m10086","123456","1"));
-        data.add(getParams("m11086","123456","2"));
-        data.add(getParams("","123456","2"));
-        data.add(getParams("m10086","","2"));
-        data.add(getParams("m10086","123456",null));
+        data.add(getParams("m10086","123456"));
+        data.add(getParams("m10086","123457"));
+        data.add(getParams("m10086","123456"));
+        data.add(getParams("m11086","123456"));
+        data.add(getParams("","123456"));
+        data.add(getParams("m10086",""));
+        data.add(getParams("m10086","123456"));
         for(int i=0;i<data.size();i++){
             ResponseEntity responseEntity = loginController.login(data.get(i));
 
@@ -40,11 +40,10 @@ public class TestLogin {
         }
 
     }
-    public Map<String, Object> getParams(String userNo,String password,String characters){
+    public Map<String, Object> getParams(String userNo,String password){
         Map<String, Object> params = new LinkedHashMap<>();
         params.put("userNo",userNo);
         params.put("password",password);
-        params.put("characters",characters);
         return params;
     }
     @Test
