@@ -17,7 +17,7 @@ public class LoginService {
     @Autowired
     private UserRepository userRepository;
 
-    public Result<Object> Login(String userNo, String password){
+    public Result<UserEntity> Login(String userNo, String password){
         if(userNo==null||userNo.equals("")){
             return new Result<>(false,Consts.USERNO_IS_EMPTY);
         }
