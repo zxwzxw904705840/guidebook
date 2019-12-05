@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<!-- Loding font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
+
+<!-- Custom Styles -->
+<link rel="stylesheet" type="text/css" href="../css/styles.css">
+
+<title>Register</title>
+</head>
+<body>
+
+<!-- Backgrounds -->
+
+<div id="register-bg" class="container-fluid">
+
+  <div class="bg-img"></div>
+  <div class="bg-color"></div>
+</div>
+
+<!-- End Backgrounds -->
+
+<div class="container" id="register">
+	<div class="row justify-content-center">
+	<div class="col-lg-8">
+	  <div class="register">
+
+		<h1>Register</h1>
+		
+		<!-- Loging form -->
+			  <form>
+				<div class="form-group">
+				  <input class="form-control" id="username" aria-describedby="emailHelp" placeholder="User Number">
+				  
+				</div>
+				<div class="form-group">
+				  <input class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+				  
+				</div>
+				<div class="form-group">
+				  <input type="password" class="form-control" id="pass1" placeholder="Password">
+				</div>
+
+				<div class="form-group">
+				  <input type="password" class="form-control" id="pass2" placeholder="Password Again">
+				</div>
+
+				<div class="form-group" id="major">
+				    <select style="font-size: 5；">
+				    	<option value="none" selected disabled hidden>Major</option> 
+				    	<option value="volvo">aaa</option>
+				    	<option value="saab">bbb</option>
+				    	<option value="opel">ccc</option>
+				    </select>
+				 </div>
+
+				<div class="form-group">
+				  <input class="form-control" id="tel" placeholder="Telephone">
+				</div>
+
+				
+
+				 <div class="form-check" style="display: flex;">
+				 	
+				  	<link rel="stylesheet" type="text/css" href="../css/switch.css">
+				  	<div style="padding-left:20px;display: inline;" class="switch">
+	<div class="slide-btn" >
+		<div class="inner-on" id="inner" >
+			<input style="display:none;" type="checkbox" checked>
+			<span class="left"><font size=2.5 >学生</font></span>
+			<span class="space">&nbsp;</span>
+			<span class="right"><font size=2.5>教师</font></span>
+		</div>
+	</div>
+	<script type="text/javascript">
+		document.getElementById("inner").onclick = function() {
+			var characters;
+			if (this.className == "inner-on") {
+				this.style.left = -61 + "px";
+				this.childNodes[1].checked = false;
+				this.className = "inner-off";
+				characters = 1;
+			}else{
+				this.style.left = 0;
+				this.childNodes[1].checked = true;
+				this.className = "inner-on";
+				characters = 0;
+			}
+			console.log(characters)
+		}
+	</script>
+	</div>
+
+
+				 
+
+				  <label class="change"><a href="./login.html">已有账号，前往登陆<a></label>
+				  
+				</div>
+
+				<button type="submit" class="btn btn-lg btn-block btn-success">注册</button>
+			  </form>
+		 <!-- End Loging form -->
+
+	  </div>
+	</div>
+	</div>
+</div>
+
+
+</body>
+</html>
