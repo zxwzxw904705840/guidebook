@@ -1,6 +1,9 @@
 package com.groupname.demo.entity;
 
+import com.groupname.demo.utils.MD5;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "class", schema = "root", catalog = "")
@@ -11,13 +14,25 @@ public class ClassEntity {
     private BookEntity guidebook;
     private Integer guidebookStatus;
 
+    public ClassEntity(){
+        classNo= MD5.getMD5(String.valueOf(new Date().getTime()));
+        /*
+        TODO:const
+         */
+        this.guidebookStatus=2;
+    }
+
     @Id
     @Column(name = "classNo")
     public String getClassNo() {
         return classNo;
     }
-    public void setClassNo(String classNo){
+    private void setClassNo(String classNo){
         this.classNo=classNo;
+    }
+    public void resetClassNo(){
+        if(course!=null)
+            this.setClassNo(MD5.getMD5(String.valueOf(new Date().getTime())+course.getCourseNo()));
     }
 
     @OneToOne
@@ -28,7 +43,7 @@ public class ClassEntity {
         this.course=course;
     }
 
-    @OneToOne
+    @ManyToOne
     public UserEntity getTeacher() {
         return teacher;
     }
@@ -36,7 +51,7 @@ public class ClassEntity {
         this.teacher=teacher;
     }
 
-    @OneToOne
+    @ManyToOne
     public BookEntity getGuidebook() {
         return guidebook;
     }
