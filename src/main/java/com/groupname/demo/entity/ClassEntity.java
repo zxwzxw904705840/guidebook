@@ -1,5 +1,6 @@
 package com.groupname.demo.entity;
 
+import com.groupname.demo.consts.Consts;
 import com.groupname.demo.utils.MD5;
 
 import javax.persistence.*;
@@ -16,10 +17,7 @@ public class ClassEntity {
 
     public ClassEntity(){
         classNo= MD5.getMD5(String.valueOf(new Date().getTime()));
-        /*
-        TODO:const
-         */
-        this.guidebookStatus=2;
+        this.guidebookStatus= Consts.Status.NORMAL.getValue();
     }
 
     @Id
