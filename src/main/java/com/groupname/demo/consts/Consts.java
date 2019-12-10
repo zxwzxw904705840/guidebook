@@ -19,7 +19,16 @@ public class Consts {
     public static final String REGISTER_FAIL = "注册失败！";
     public static final String ACCOUNT_CAN_USE = "账户可以使用";
 
+    public static final String PERMISSION_DENIED = "权限不足";
+
     public static final String ADD_BOOK_SUCCESS = "图书添加成功";
+    public static final String ISBN_ERROR="ISBN错误";
+    public static final String ISBN_IS_EMPTY="ISBN不能为空";
+    public static final String BOOK_NAME_IS_EMPTY="书名不能为空";
+    public static final String AUTHOR_IS_EMPTY="作者不能为空";
+    public static final String AUTHOR_MAJOR_IS_EMPTY="专业领域不能为空";
+    public static final String PUBLISHING_HOUSE_IS_EMPTY="出版社不能为空";
+    public static final String PUBLISHING_TIME_IS_EMPTY="出版时间不能为空";
 
     public enum Status{
             NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3);
@@ -62,4 +71,15 @@ public class Consts {
             return value;
         }
     }
+    public enum UserType{
+        STUDENT(0),TEACHER(1),MANAGER(2);
+        private Integer value;
+        UserType(Integer value) {
+            this.value=value;
+        }
+        public Integer getValue() {
+            return value;
+        }
+    }
+
 }
