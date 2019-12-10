@@ -16,6 +16,11 @@ public class ReviewEntity {
     public ReviewEntity(){
         reviewNo= MD5.getMD5(String.valueOf(new Date().getTime()));
     }
+    public ReviewEntity(Integer reviewType,String reviewObjectNo){
+        this.reviewType=reviewType;
+        this.reviewObjectNo=reviewObjectNo;
+        this.resetReviewNo();
+    }
 
     @Id
     @Column(name = "reviewNo")
