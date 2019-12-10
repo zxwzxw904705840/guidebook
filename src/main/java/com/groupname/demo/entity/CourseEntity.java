@@ -1,5 +1,7 @@
 package com.groupname.demo.entity;
 
+import com.groupname.demo.consts.Consts;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,9 @@ public class CourseEntity {
     private Integer courseType;
     private MajorEntity major;
 
+    public CourseEntity(){
+        this.courseType= Consts.CourseType.PUBLIC_OBLIGATORY_COURSE.getValue();
+    }
     @Id
     @Column(name = "courseNo")
     public String getCourseNo() {
