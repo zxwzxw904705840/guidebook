@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MessageRepository extends JpaRepository<MessageEntity,String> {
-    MessageEntity findByMessageNo(Integer messageNo);
+    MessageEntity findByMessageNo(String messageNo);
 }

@@ -1,23 +1,30 @@
 package com.groupname.demo.entity;
 
+import com.groupname.demo.utils.MD5;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "message", schema = "root", catalog = "")
 public class MessageEntity {
-    private Integer messageNo;
+    private String messageNo;
     private UserEntity user;
     private String messageContent;
     private Integer messageStatus;
 
+    public MessageEntity(){
+        messageNo= MD5.getMD5(String.valueOf(new Date().getTime()));
+    }
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "messageNo")
-    public Integer getMessageNo() {
+    public String getMessageNo() {
         return messageNo;
     }
-    public void setMessageNo(Integer messageNo){
-        this.messageNo=messageNo;
+    private void setMessageNo(String messageNo){this.messageNo=messageNo;}
+    public void resetMessageNo(){
+        if(user!=null)
+            this.setMessageNo(MD5.getMD5(String.valueOf(new Date().getTime())+user.getUserNo()));
     }
 
     @ManyToOne
