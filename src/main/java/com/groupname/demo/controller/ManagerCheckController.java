@@ -27,4 +27,28 @@ public class ManagerCheckController {
 
         return "ManagerCheck-TeacherSign";
     }
+
+    @RequestMapping(value="/ShowBookChange",method=RequestMethod.GET)
+    public String showBookChange(HttpServletRequest request,ModelMap model){
+
+        return "ManagerCheck-BookChange";
+    }
+
+    @RequestMapping(value="/ShowBookBuy",method=RequestMethod.GET)
+    public String showBookBuy(HttpServletRequest request,ModelMap model){
+
+        return "ManagerCheck-BookBuy";
+    }
+
+    @RequestMapping(value="/ShowCourseWare",method=RequestMethod.GET)
+    public String showCourseWare(HttpServletRequest request,ModelMap model){
+
+        return "ManagerCheck-CourseWare";
+    }
+
+    @RequestMapping(value="/ShowMessage",method=RequestMethod.GET)
+    public String showMessage(HttpServletRequest request,ModelMap model){
+
+        return "ManagerCheck-Message";
+    }
 }
