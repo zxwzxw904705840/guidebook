@@ -47,9 +47,14 @@ public class Consts {
     public static final String COURSE_TYPE_IS_EMPTY="课程类型不能为空";
     public static final String COURSE_MAJOR_NO_ERROR="可选专业号错误";
 
+    public static final String ADD_CLASS_SUCCESS="开课成功";
+    public static final String ADD_CLASS_FAILED="开课失败";
+    public static final String COURSE_NOT_EXISTS="课程不存在";
+    public static final String GUIDEBOOK_EXISTS="教参存在";//success=true
+
 
     public enum Status{
-            NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3);
+            NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3),DEFAULT(4);
         private Integer value;
         Status(Integer value) {
             this.value=value;

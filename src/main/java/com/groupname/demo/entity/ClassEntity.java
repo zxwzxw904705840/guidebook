@@ -14,10 +14,12 @@ public class ClassEntity {
     private UserEntity teacher;
     private BookEntity guidebook;
     private Integer guidebookStatus;
+    private Integer classStatus;
 
     public ClassEntity(){
         classNo= MD5.getMD5(String.valueOf(new Date().getTime()));
-        this.guidebookStatus= Consts.Status.REVIEWING.getValue();
+        this.guidebookStatus= Consts.Status.DEFAULT.getValue();
+        this.classStatus=Consts.Status.REVIEWING.getValue();
     }
 
     @Id
@@ -64,6 +66,15 @@ public class ClassEntity {
     }
     public void setGuidebookStatus(Integer guidebookStatus){
         this.guidebookStatus=guidebookStatus;
+    }
+
+    @Basic
+    @Column(name = "classStatus")
+    public Integer getClassStatus() {
+        return classStatus;
+    }
+    public void setClassStatus(Integer classStatus){
+        this.classStatus=classStatus;
     }
 
     @Override
