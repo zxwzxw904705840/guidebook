@@ -50,7 +50,7 @@ public class LoginService {
         /*
         如果是学生，直接通过注册
          */
-        if(user.getCharacters()==0){
+        if(user.getCharacters()==Consts.UserType.STUDENT.getValue()){
             user.setUserStatus(Consts.Status.NORMAL.getValue());
             userRepository.save(user);
             return new Result<>(true,Consts.REGISTER_SUCCESS);
