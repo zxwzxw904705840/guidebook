@@ -1,7 +1,10 @@
 package com.groupname.demo.service;
 
 import com.groupname.demo.consts.Consts;
+import com.groupname.demo.entity.ReviewEntity;
 import com.groupname.demo.entity.UserEntity;
+import com.groupname.demo.repository.MajorRepository;
+import com.groupname.demo.repository.ReviewRepository;
 import com.groupname.demo.repository.UserRepository;
 import com.groupname.demo.utils.Result;
 import org.hibernate.Session;
@@ -16,6 +19,10 @@ import java.sql.Struct;
 public class LoginService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
+    @Autowired
+    private MajorRepository majorRepository;
 
     public Result<UserEntity> Login(String userNo, String password){
         if(userNo==null||userNo.equals("")){
@@ -35,7 +42,7 @@ public class LoginService {
         return new Result<>(true,Consts.LOGIN_SUCCESS,userEntity);
     }
 
-    public Result<Object> register(UserEntity user){
+    public Result register(UserEntity user){
         Result result = checkUser(user);
         if(!result.isSuccess()){
             return result;
@@ -44,22 +51,20 @@ public class LoginService {
         如果是学生，直接通过注册
          */
         if(user.getCharacters()==0){
-            user.setUserStatus(0);
+            user.setUserStatus(Consts.Status.NORMAL.getValue());
             userRepository.save(user);
             return new Result<>(true,Consts.REGISTER_SUCCESS);
         }
         /*
         如果是教师，加入审核队列
          */
-        user.setUserStatus(1);
+        user.setUserStatus(Consts.Status.REVIEWING.getValue());
         userRepository.save(user);
-        /*
-        TODO:加入审核队列
-         */
+        reviewRepository.save(new ReviewEntity(Consts.ReviewType.USER_NO.getValue(),user.getUserNo()));
         return new Result<>(true,Consts.REGISTER_WAITING_FOR_REVIEW);
     }
 
-    private Result<Object> checkUser(UserEntity user){
+    private Result checkUser(UserEntity user){
         if (user==null){
             return new Result<>(false,Consts.REGISTER_FAIL);
         }
@@ -91,7 +96,6 @@ public class LoginService {
             return new Result<>(false,Consts.ILLEGAL_TELEPHONE);
         }
         try{
-
             System.out.println(Integer.parseInt("123456789"));
             //Integer.parseInt(user.getPhone());
         }catch (Exception e){
@@ -100,6 +104,9 @@ public class LoginService {
         UserEntity userEntity = userRepository.findByUserNo(user.getUserNo());
         if(userEntity!=null && userEntity.getUserStatus()!=2){
             return new Result<>(false,Consts.USERNO_EXISTS);
+        }
+        if(user.getMajor()==null||user.getMajor().getMajorNo()==null||majorRepository.findByMajorNo(user.getMajor().getMajorNo())==null){
+            return new Result(false,Consts.REGISTER_FAIL);
         }
         return new Result<>(true,Consts.ACCOUNT_CAN_USE);
     }
