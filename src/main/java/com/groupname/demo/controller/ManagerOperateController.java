@@ -31,8 +31,9 @@ public class ManagerOperateController {
 
     @RequestMapping(value="/ShowCoursewareInfor",method= RequestMethod.GET)
     public String showCourseWare(HttpServletRequest request, ModelMap model){
-       /* ArrayList<BookEntity> coursewareInfor=new ArrayList<>();
-        coursewareInfor.add(bookRepository.)*/
+        ArrayList<BookEntity> coursewareInfor=new ArrayList<>();
+
+
         return "ManagerWare";
     }
 }
