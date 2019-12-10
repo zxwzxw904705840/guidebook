@@ -2,6 +2,7 @@ package com.groupname.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user", schema = "root", catalog = "")
@@ -15,11 +16,12 @@ public class UserEntity implements Serializable {
     private String email;
     private Integer characters;
     private String remark;
-    private String majorNo;
     private Integer userStatus;
 
+    private MajorEntity major;
+
     @Id
-    @Column(name = "userno")
+    @Column(name = "userNo")
     public String getUserNo() {
         return userNo;
     }
@@ -28,7 +30,7 @@ public class UserEntity implements Serializable {
     }
 
     @Basic
-    @Column(name = "username")
+    @Column(name = "userName")
     public String getUserName(){return userName;}
     public void setUserName(String userName){
         this.userName=userName;
@@ -81,22 +83,21 @@ public class UserEntity implements Serializable {
 
 
     @Basic
-    @Column(name = "majorno")
-    public String getMajorNo() {
-        return majorNo;
-    }
-    public void setMajorNo(String majorNo) {
-        this.majorNo = majorNo;
-    }
-
-    @Basic
-    @Column(name = "userstatus")
+    @Column(name = "userStatus")
     public Integer getUserStatus() {
         return userStatus;
     }
     public void setUserStatus(Integer userStatus) {
         this.userStatus = userStatus;
     }
+
+    @OneToOne
+    public MajorEntity getMajor(){return major;}
+
+    public void setMajor(MajorEntity major){
+        this.major=major;
+    }
+
 
     @Override
     public String toString(){
@@ -107,7 +108,7 @@ public class UserEntity implements Serializable {
                 this.email+","+
                 this.characters+","+
                 this.remark+","+
-                this.majorNo+","+
+                this.major+","+
                 this.userStatus;
 
     }
