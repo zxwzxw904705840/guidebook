@@ -19,6 +19,8 @@ public class Consts {
     public static final String REGISTER_FAIL = "注册失败！";
     public static final String ACCOUNT_CAN_USE = "账户可以使用";
 
+    public static final String ADD_BOOK_SUCCESS = "图书添加成功";
+
     public enum Status{
             NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3);
         private Integer value;
@@ -44,6 +46,16 @@ public class Consts {
         USER_NO(0),CLASS_NO(1),FILE_NO(2),MESSAGE_NO(3),PURCHASE_NO(4);
         private Integer value;
         ReviewType(Integer value) {
+            this.value=value;
+        }
+        public Integer getValue() {
+            return value;
+        }
+    }
+    public enum BookMajor{
+        MATH(0),CS(1),CHEMISTRY(2),PHYSICS(3),HUMANITIES(4),ART(5);
+        private Integer value;
+        BookMajor(Integer value) {
             this.value=value;
         }
         public Integer getValue() {
