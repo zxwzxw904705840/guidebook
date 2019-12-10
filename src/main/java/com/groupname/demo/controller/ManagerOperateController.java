@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 public class ManagerOperateController {
@@ -31,9 +33,16 @@ public class ManagerOperateController {
 
     @RequestMapping(value="/ShowCoursewareInfor",method= RequestMethod.GET)
     public String showCourseWare(HttpServletRequest request, ModelMap model){
-        ArrayList<BookEntity> coursewareInfor=new ArrayList<>();
-
-
+        List<BookEntity> coursewareInfor = bookRepository.findAll();
+        // System.out.println(coursewareInfor);
+        for(int i=0;i<coursewareInfor.size();i++)
+        {
+            BookEntity book=coursewareInfor.get(i);
+            System.out.println(book);
+            System.out.println(book.getIsbn());
+            System.out.println(book.getBookName());
+        }
+        model.addAttribute("coursewareInfor",coursewareInfor);
         return "ManagerWare";
     }
 }
