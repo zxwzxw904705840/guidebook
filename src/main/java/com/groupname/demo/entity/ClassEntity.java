@@ -17,7 +17,7 @@ public class ClassEntity {
 
     public ClassEntity(){
         classNo= MD5.getMD5(String.valueOf(new Date().getTime()));
-        this.guidebookStatus= Consts.Status.NORMAL.getValue();
+        this.guidebookStatus= Consts.Status.REVIEWING.getValue();
     }
 
     @Id
