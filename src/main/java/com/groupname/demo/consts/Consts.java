@@ -29,6 +29,9 @@ public class Consts {
     public static final String AUTHOR_MAJOR_IS_EMPTY="专业领域不能为空";
     public static final String PUBLISHING_HOUSE_IS_EMPTY="出版社不能为空";
     public static final String PUBLISHING_TIME_IS_EMPTY="出版时间不能为空";
+    public static final String ADD_BOOK_FAILED = "图书添加成功";
+    public static final String AUTHOR_MAJOR_ERROR="专业领域错误";
+    public static final String BOOK_EXISTS="图书已存在";
 
     public enum Status{
             NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3);
