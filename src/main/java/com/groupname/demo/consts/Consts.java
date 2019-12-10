@@ -19,4 +19,35 @@ public class Consts {
     public static final String REGISTER_FAIL = "注册失败！";
     public static final String ACCOUNT_CAN_USE = "账户可以使用";
 
+    public enum Status{
+            NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3);
+        private Integer value;
+        Status(Integer value) {
+            this.value=value;
+        }
+        public Integer getValue() {
+            return value;
+        }
+    }
+    public enum PurchaseStatus{
+        PURCHASING(0),REVIEWING(1),REVIEW_FAILED(2),COMPLETED(3);
+        private Integer value;
+        PurchaseStatus(Integer value) {
+            this.value=value;
+        }
+        public Integer getValue() {
+            return value;
+        }
+    }
+
+    public enum ReviewType{
+        USER_NO(0),CLASS_NO(1),FILE_NO(2),MESSAGE_NO(3),PURCHASE_NO(4);
+        private Integer value;
+        ReviewType(Integer value) {
+            this.value=value;
+        }
+        public Integer getValue() {
+            return value;
+        }
+    }
 }
