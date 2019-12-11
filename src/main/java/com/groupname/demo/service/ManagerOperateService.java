@@ -56,8 +56,8 @@ public class ManagerOperateService {
     /*
     开课
      */
-    public Result addClass(ClassEntity classEntity,UserEntity user){
-        Result result = checkUserPermission(user);
+    public Result addClass(ClassEntity classEntity,UserEntity manager){
+        Result result = checkUserPermission(manager);
         if(!result.isSuccess()){
             return result;
         }
@@ -81,8 +81,8 @@ public class ManagerOperateService {
     /*
     查找课程信息
      */
-    public Result<ArrayList<CourseEntity>> getCourseByTerm(Integer term, UserEntity user){
-        Result result = checkUserPermission(user);
+    public Result<ArrayList<CourseEntity>> getCourseByTerm(Integer term, UserEntity manager){
+        Result result = checkUserPermission(manager);
         if(!result.isSuccess()){
             return result;
         }
@@ -92,21 +92,21 @@ public class ManagerOperateService {
         ArrayList<CourseEntity> courseEntityArrayList = courseRepository.findAllByTerm(term);
         return new Result<>(true,Consts.INQUIRE_SUCCESS,courseEntityArrayList);
     }
-    public Result<ArrayList<CourseEntity>> getAllCourse(UserEntity user){
-        Result result = checkUserPermission(user);
+    public Result<ArrayList<CourseEntity>> getAllCourse(UserEntity manager){
+        Result result = checkUserPermission(manager);
         if(!result.isSuccess()){
             return result;
         }
         ArrayList<CourseEntity> courseEntityArrayList = courseRepository.findAll();
         return new Result<>(true,Consts.INQUIRE_SUCCESS,courseEntityArrayList);
     }
-    public Result<ArrayList<CourseEntity>> getCourseByCourseName(String courseName,UserEntity user){
-        Result result = checkUserPermission(user);
+    public Result<ArrayList<CourseEntity>> getCourseByCourseName(String courseName,UserEntity manager){
+        Result result = checkUserPermission(manager);
         if(!result.isSuccess()){
             return result;
         }
         if(courseName==null){
-            return getAllCourse(user);
+            return getAllCourse(manager);
         }
         courseName = "%"+courseName+"%";
         ArrayList<CourseEntity> courseEntityArrayList = courseRepository.findAllByCourseNameLike(courseName);
@@ -118,8 +118,8 @@ public class ManagerOperateService {
     /*
     查看留言
      */
-    public Result<ArrayList<MessageEntity>> getMessage(UserEntity user){
-        Result result = checkUserPermission(user);
+    public Result<ArrayList<MessageEntity>> getMessage(UserEntity manager){
+        Result result = checkUserPermission(manager);
         if(!result.isSuccess()){
             return result;
         }
