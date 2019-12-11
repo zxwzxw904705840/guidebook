@@ -48,6 +48,9 @@ public class ManagerUserService {
         ArrayList<UserEntity> userEntityArrayList=userRepository.findAllByUserStatusAndUserNoLike(Consts.Status.NORMAL.getValue(),userNo);
         return new Result<>(true,Consts.INQUIRE_SUCCESS,userEntityArrayList);
     }
+    /*
+    TODO:用户信息修改和删除
+     */
     private Result checkUserPermission(UserEntity user){
         if(user==null||user.getUserNo()==null||user.getUserNo().equals("")) {
             return new Result(false, Consts.PERMISSION_DENIED);
