@@ -38,6 +38,9 @@ public class LoginService {
         if(userEntity==null||!userEntity.getPassword().equals(password)){
             return new Result<>(false, Consts.WRONG_USERNO_OR_PASSWORD);
         }
+        if(userEntity.getUserStatus()!=Consts.Status.NORMAL.getValue()){
+            return new Result(false,Consts.PERMISSION_DENIED);
+        }
 
         return new Result<>(true,Consts.LOGIN_SUCCESS,userEntity);
     }
