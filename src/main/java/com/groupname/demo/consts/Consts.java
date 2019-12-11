@@ -21,6 +21,7 @@ public class Consts {
 
     public static final String PERMISSION_DENIED = "权限不足";
     public static final String USERNO_NOT_EXISTS = "用户不存在";
+    public static final String INQUIRE_SUCCESS = "查询成功";
 
     public static final String ADD_BOOK_SUCCESS = "图书添加成功";
     public static final String ISBN_ERROR="ISBN错误";
