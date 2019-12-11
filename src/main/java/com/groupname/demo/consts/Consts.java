@@ -20,6 +20,7 @@ public class Consts {
     public static final String ACCOUNT_CAN_USE = "账户可以使用";
 
     public static final String PERMISSION_DENIED = "权限不足";
+    public static final String USERNO_NOT_EXISTS = "用户不存在";
 
     public static final String ADD_BOOK_SUCCESS = "图书添加成功";
     public static final String ISBN_ERROR="ISBN错误";
@@ -51,6 +52,10 @@ public class Consts {
     public static final String ADD_CLASS_FAILED="开课失败";
     public static final String COURSE_NOT_EXISTS="课程不存在";
     public static final String GUIDEBOOK_EXISTS="教参存在";//success=true
+
+    public static final String MESSAGE_CONTENT_IS_EMPTY="留言内容不能为空";
+    public static final String ADD_MESSAGE_SUCCESS="留言成功";
+    public static final String ADD_MESSAGE_FAILED="留言失败";
 
 
     public enum Status{

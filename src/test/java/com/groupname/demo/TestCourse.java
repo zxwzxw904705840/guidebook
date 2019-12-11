@@ -19,7 +19,7 @@ public class TestCourse {
     @Autowired
     ManagerOperateService managerOperateService;
     @Test
-    public void testClassEntity(){
+    public void testAddCourse(){
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUserNo("m10086");

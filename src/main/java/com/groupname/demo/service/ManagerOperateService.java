@@ -1,13 +1,8 @@
 package com.groupname.demo.service;
 
 import com.groupname.demo.consts.Consts;
-import com.groupname.demo.entity.BookEntity;
-import com.groupname.demo.entity.CourseEntity;
-import com.groupname.demo.entity.UserEntity;
-import com.groupname.demo.repository.BookRepository;
-import com.groupname.demo.repository.CourseRepository;
-import com.groupname.demo.repository.MajorRepository;
-import com.groupname.demo.repository.UserRepository;
+import com.groupname.demo.entity.*;
+import com.groupname.demo.repository.*;
 import com.groupname.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +17,8 @@ public class ManagerOperateService {
     CourseRepository courseRepository;
     @Autowired
     MajorRepository majorRepository;
-
+    @Autowired
+    ClassRepository classRepository;
     /*
     添加图书
      */
@@ -38,6 +34,9 @@ public class ManagerOperateService {
         bookRepository.save(book);
         return new Result(true, Consts.ADD_BOOK_SUCCESS);
     }
+    /*
+    添加课程
+     */
     public Result addCourse(CourseEntity course,UserEntity user){
         Result result = checkUserPermission(user);
         if(!result.isSuccess()){
@@ -49,6 +48,31 @@ public class ManagerOperateService {
         }
         courseRepository.save(course);
         return new Result(true,Consts.ADD_COURSE_SUCCESS);
+    }
+    /*
+    开课
+     */
+    public Result addClass(ClassEntity classEntity,UserEntity user){
+        Result result = checkUserPermission(user);
+        if(!result.isSuccess()){
+            return result;
+        }
+        result = checkClass(classEntity);
+        if(!result.isSuccess()){
+            return result;
+        }
+        /*
+        if(result.getMessage().equals(Consts.GUIDEBOOK_EXISTS)){
+            classEntity.setGuidebookStatus(Consts.Status.REVIEWING.getValue());
+        }else{
+            classEntity.setGuidebookStatus(Consts.Status.DEFAULT.getValue());
+        }
+        */
+        classEntity.setGuidebook(null);
+        classEntity.setGuidebookStatus(Consts.Status.DEFAULT.getValue());
+        classEntity.resetClassNo();
+        classRepository.save(classEntity);
+        return new Result(true,Consts.ADD_CLASS_SUCCESS);
     }
 
      private Result checkUserPermission(UserEntity user){
@@ -140,4 +164,33 @@ public class ManagerOperateService {
         }
         return new Result(true,"");
      }
+
+    private Result checkClass(ClassEntity classEntity){
+        if(classEntity==null){
+            return new Result(false,Consts.ADD_CLASS_FAILED);
+        }
+        if(classEntity.getTeacher()==null||classEntity.getTeacher().getUserNo()==null){
+            return new Result(false,Consts.USERNO_NOT_EXISTS);
+        }
+        if(classEntity.getCourse()==null||courseRepository.findByCourseNo(classEntity.getCourse().getCourseNo())==null){
+            return new Result(false,Consts.COURSE_NOT_EXISTS);
+        }
+        UserEntity teacher = userRepository.findByUserNo(classEntity.getTeacher().getUserNo());
+        if(teacher==null){
+            return new Result(false,Consts.USERNO_NOT_EXISTS);
+        }
+        if(teacher.getCharacters()!=Consts.UserType.TEACHER.getValue()){
+            return new Result(false,Consts.ADD_CLASS_FAILED);
+        }
+        /*if(classEntity.getGuidebook()!=null){
+            if(classEntity.getGuidebook().getIsbn().length()!=13){
+                return new Result(false,Consts.GUIDEBOOK_ISBN_ERROR);
+            }
+            if(bookRepository.findByIsbn(classEntity.getGuidebook().getIsbn())==null){
+                return new Result(false,Consts.GUIDEBOOK_NOT_EXISTS_ERROR);
+            }
+            return new Result(true,Consts.GUIDEBOOK_EXISTS);
+        }*/
+        return new Result(true,"");
+    }
 }
