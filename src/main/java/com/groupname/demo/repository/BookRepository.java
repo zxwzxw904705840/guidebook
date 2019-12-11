@@ -9,6 +9,8 @@ import java.util.ArrayList;
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity,String> {
     BookEntity findByIsbn(String isbn);
-    @Override
     ArrayList<BookEntity> findAll();
+    ArrayList<BookEntity> findAllByAuthorMajor(Integer authorMajor);
+    ArrayList<BookEntity> findAllByBookNameLike(String bookName);
+    ArrayList<BookEntity> findAllByIsbnLike(String isbn);
 }
