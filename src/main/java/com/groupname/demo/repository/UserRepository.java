@@ -11,4 +11,6 @@ public interface UserRepository extends JpaRepository<UserEntity,String> {
     UserEntity findByUserNo(String userNo);
     ArrayList<UserEntity> findAllByUserStatus(Integer userStatus);
     ArrayList<UserEntity> findAllByUserStatusAndCharacters(Integer userStatus,Integer characters);
+    ArrayList<UserEntity> findAllByUserStatusAndUserNoLike(Integer userStatus,String userNo);
+
 }

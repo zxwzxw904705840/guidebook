@@ -18,10 +18,12 @@ public class Consts {
     public static final String PHONE_IS_EMPTY = "手机号不能为空";
     public static final String REGISTER_FAIL = "注册失败";
     public static final String ACCOUNT_CAN_USE = "账户可以使用";
+    public static final String USER_CHARACTER_ERROR = "用户角色错误";
 
     public static final String PERMISSION_DENIED = "权限不足";
     public static final String USERNO_NOT_EXISTS = "用户不存在";
     public static final String INQUIRE_SUCCESS = "查询成功";
+    public static final String INQUIRE_FAILED = "查询失败";
 
     public static final String ADD_BOOK_SUCCESS = "图书添加成功";
     public static final String ISBN_ERROR="ISBN错误";
