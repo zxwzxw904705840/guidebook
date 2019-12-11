@@ -7,6 +7,8 @@ import com.groupname.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class ManagerOperateService {
     @Autowired
@@ -19,6 +21,8 @@ public class ManagerOperateService {
     MajorRepository majorRepository;
     @Autowired
     ClassRepository classRepository;
+    @Autowired
+    MessageRepository messageRepository;
     /*
     添加图书
      */
@@ -74,8 +78,57 @@ public class ManagerOperateService {
         classRepository.save(classEntity);
         return new Result(true,Consts.ADD_CLASS_SUCCESS);
     }
+    /*
+    查找课程信息
+     */
+    public Result<ArrayList<CourseEntity>> getCourseByTerm(Integer term, UserEntity user){
+        Result result = checkUserPermission(user);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if(term<0||term>8){
+            return new Result(false,Consts.TERM_ERROR);
+        }
+        ArrayList<CourseEntity> courseEntityArrayList = courseRepository.findAllByTerm(term);
+        return new Result<>(true,Consts.INQUIRE_SUCCESS,courseEntityArrayList);
+    }
+    public Result<ArrayList<CourseEntity>> getAllCourse(UserEntity user){
+        Result result = checkUserPermission(user);
+        if(!result.isSuccess()){
+            return result;
+        }
+        ArrayList<CourseEntity> courseEntityArrayList = courseRepository.findAll();
+        return new Result<>(true,Consts.INQUIRE_SUCCESS,courseEntityArrayList);
+    }
+    public Result<ArrayList<CourseEntity>> getCourseByCourseName(String courseName,UserEntity user){
+        Result result = checkUserPermission(user);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if(courseName==null){
+            return getAllCourse(user);
+        }
+        courseName = "%"+courseName+"%";
+        ArrayList<CourseEntity> courseEntityArrayList = courseRepository.findAllByCourseNameLike(courseName);
+        return new Result<>(true,Consts.INQUIRE_SUCCESS,courseEntityArrayList);
+    }
+    /*
+    TODO:修改课程信息，删除课程
+     */
+    /*
+    查看留言
+     */
+    public Result<ArrayList<MessageEntity>> getMessage(UserEntity user){
+        Result result = checkUserPermission(user);
+        if(!result.isSuccess()){
+            return result;
+        }
+        ArrayList<MessageEntity> messageEntityArrayList = messageRepository.findAllByMessageStatus(Consts.Status.NORMAL.getValue());
+        return new Result<>(true,Consts.INQUIRE_SUCCESS,messageEntityArrayList);
+    }
 
-     private Result checkUserPermission(UserEntity user){
+
+    private Result checkUserPermission(UserEntity user){
         if(user==null) {
             return new Result(false, Consts.PERMISSION_DENIED);
         }
@@ -85,7 +138,7 @@ public class ManagerOperateService {
         }
         return new Result(true, Consts.ACCOUNT_CAN_USE);
      }
-     private Result checkBook(BookEntity book){
+    private Result checkBook(BookEntity book){
          if(book==null){
              return new Result(false,Consts.ADD_BOOK_FAILED);
          }
@@ -118,8 +171,7 @@ public class ManagerOperateService {
          }
          return new Result(true,"");
      }
-
-     private Result checkCourse(CourseEntity course){
+    private Result checkCourse(CourseEntity course){
         if(course==null){
             return new Result(false,Consts.ADD_COURSE_FAILED);
         }
