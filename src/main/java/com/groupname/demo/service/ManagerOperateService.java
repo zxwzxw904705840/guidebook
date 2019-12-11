@@ -126,6 +126,25 @@ public class ManagerOperateService {
         ArrayList<MessageEntity> messageEntityArrayList = messageRepository.findAllByMessageStatus(Consts.Status.NORMAL.getValue());
         return new Result<>(true,Consts.INQUIRE_SUCCESS,messageEntityArrayList);
     }
+    /*
+    删除留言
+     */
+    public Result deleteMessage(String messageNo,UserEntity manager){
+        Result result = checkUserPermission(manager);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if(messageNo==null||messageNo.equals("")){
+            return new Result(false,Consts.MESSAGE_NO_NOT_EXISTS);
+        }
+        MessageEntity message = messageRepository.findByMessageNo(messageNo);
+        if(message==null||message.getMessageStatus()==Consts.Status.DELETED.getValue()){
+            return new Result(false,Consts.MESSAGE_NO_NOT_EXISTS);
+        }
+        message.setMessageStatus(Consts.Status.DELETED.getValue());
+        messageRepository.save(message);
+        return new Result(true,Consts.MESSAGE_DELETE_SUCCESS);
+    }
 
 
     private Result checkUserPermission(UserEntity user){

@@ -1,5 +1,6 @@
 package com.groupname.demo;
 
+import com.groupname.demo.entity.MessageEntity;
 import com.groupname.demo.entity.UserEntity;
 import com.groupname.demo.service.ManagerOperateService;
 import com.groupname.demo.utils.Result;
@@ -31,6 +32,15 @@ public class TestManagerOperate {
         result = managerOperateService.getMessage(userEntity);
         System.out.println(result.isSuccess()+result.getMessage()+" "+result.getObject());
     }
+    @Test
+    public void testManagerOperateUpdate(){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserNo("m10086");
+        Result result;
+        result = managerOperateService.deleteMessage("d5a4792aeb3785424d033a58ba2f87c8",userEntity);
+        System.out.println(result.isSuccess()+result.getMessage());
+    }
+
     @Test
     public void contextLoads(){
 
