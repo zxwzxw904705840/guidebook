@@ -1,5 +1,6 @@
 package com.groupname.demo.entity;
 
+import com.groupname.demo.consts.Consts;
 import com.groupname.demo.utils.MD5;
 
 import javax.persistence.*;
@@ -14,7 +15,8 @@ public class MessageEntity {
     private Integer messageStatus;
 
     public MessageEntity(){
-        messageNo= MD5.getMD5(String.valueOf(new Date().getTime()));
+        this.messageNo= MD5.getMD5(String.valueOf(new Date().getTime()));
+        this.messageStatus= Consts.Status.REVIEWING.getValue();
     }
     @Id
     @Column(name = "messageNo")
