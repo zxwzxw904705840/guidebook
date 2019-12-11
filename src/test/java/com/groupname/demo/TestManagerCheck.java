@@ -35,6 +35,16 @@ public class TestManagerCheck {
         System.out.println(result.getObject());
     }
     @Test
+    public void testManagerCheckUpdateMessage(){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserNo("m10086");
+        Result result;
+        result = managerCheckService.reviewMessage("13048e40a2cf5353ab5ed26a762c01bc",true,userEntity);
+        System.out.println(result.isSuccess()+result.getMessage());
+        result = managerCheckService.reviewMessage("3251888dedda967d47c640a0f9f3f48b",false,userEntity);
+        System.out.println(result.isSuccess()+result.getMessage());
+    }
+    @Test
     public void contextLoads(){
 
     }

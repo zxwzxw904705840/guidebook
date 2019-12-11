@@ -21,10 +21,10 @@ public class TestMessage {
     @Test
     public void testAddMessage(){
         UserEntity userEntity = new UserEntity();
-        userEntity.setUserNo("t10011");
+        userEntity.setUserNo("s10000");
         MessageEntity messageEntity = new MessageEntity();
         messageEntity.setUser(userEntity);
-        messageEntity.setMessageContent("留言测试");
+        messageEntity.setMessageContent("留言测试4");
         Result result=messageService.addMessage(messageEntity);
         System.out.println(result.isSuccess()+result.getMessage());
     }

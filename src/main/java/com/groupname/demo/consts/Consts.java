@@ -61,11 +61,13 @@ public class Consts {
     public static final String ADD_MESSAGE_FAILED="留言失败";
     public static final String MESSAGE_NO_NOT_EXISTS="留言不存在";
     public static final String MESSAGE_DELETE_SUCCESS="留言删除成功";
+    public static final String MESSAGE_STATUS_ERROR="留言状态错误";
 
     public static final String PURCHASE_NUMBER_ERROR="采购数量错误";
     public static final String PURCHASE_REQUEST_SUCCESS="采购申请成功，等待审核";
     public static final String PURCHASE_FAILED="采购申请失败";
 
+    public static final String REVIEW_SUCCESS="审核成功";
 
     public enum Status{
             NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3),DEFAULT(4);
