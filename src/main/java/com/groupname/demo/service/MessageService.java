@@ -3,6 +3,7 @@ package com.groupname.demo.service;
 import com.groupname.demo.consts.Consts;
 import com.groupname.demo.entity.MessageEntity;
 import com.groupname.demo.entity.ReviewEntity;
+import com.groupname.demo.entity.UserEntity;
 import com.groupname.demo.repository.MessageRepository;
 import com.groupname.demo.repository.ReviewRepository;
 import com.groupname.demo.repository.UserRepository;
@@ -38,8 +39,12 @@ public class MessageService {
         if(messageEntity.getUser()==null||messageEntity.getUser().getUserNo()==null){
             return new Result(false,Consts.USERNO_NOT_EXISTS);
         }
-        if(userRepository.findByUserNo(messageEntity.getUser().getUserNo())==null){
+        UserEntity user = userRepository.findByUserNo(messageEntity.getUser().getUserNo());
+        if(user==null){
             return new Result(false,Consts.USERNO_NOT_EXISTS);
+        }
+        if(user.getUserStatus()!=Consts.Status.NORMAL.getValue()){
+            return new Result(false,Consts.PERMISSION_DENIED);
         }
         return new Result(true,"");
     }
