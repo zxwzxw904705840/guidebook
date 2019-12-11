@@ -57,6 +57,10 @@ public class Consts {
     public static final String ADD_MESSAGE_SUCCESS="留言成功";
     public static final String ADD_MESSAGE_FAILED="留言失败";
 
+    public static final String PURCHASE_NUMBER_ERROR="采购数量错误";
+    public static final String PURCHASE_REQUEST_SUCCESS="采购申请成功，等待审核";
+    public static final String PURCHASE_FAILED="采购申请失败";
+
 
     public enum Status{
             NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3),DEFAULT(4);
