@@ -51,6 +51,14 @@ public class ManagerUserService {
         ArrayList<UserEntity> userEntityArrayList=userRepository.findAllByUserStatusAndUserNoLike(Consts.Status.NORMAL.getValue(),userNo);
         return new Result<>(true,Consts.INQUIRE_SUCCESS,userEntityArrayList);
     }
+    public Result<UserEntity> getUserByUserNo(String userNo,UserEntity manager){
+        Result<UserEntity> result = checkUserPermission(manager);
+        if(!result.isSuccess()){
+            return result;
+        }
+        UserEntity userEntity = userRepository.findByUserNo(userNo);
+        return new Result<>(true,Consts.INQUIRE_SUCCESS,userEntity);
+    }
     /*
     用户信息修改和删除
      */
