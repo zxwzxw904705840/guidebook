@@ -5,6 +5,7 @@ import com.groupname.demo.entity.BookEntity;
 import com.groupname.demo.entity.UserEntity;
 import com.groupname.demo.repository.BookRepository;
 import com.groupname.demo.service.ManagerOperateService;
+import com.groupname.demo.utils.BookName;
 import com.groupname.demo.utils.Result;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,19 +20,12 @@ public class TestBook {
     ManagerOperateService managerOperateService;
     @Test
     public void testBookRepository(){
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserNo("m10086");
-        BookEntity bookEntity = new BookEntity();
-        bookEntity.setIsbn("9787040446081");
-        bookEntity.setPublishingHouse("高等教育出版社");
-        bookEntity.setPublishingData(2019);
-        bookEntity.setNumber(2147483647);
-        bookEntity.setBookName("大学物理");
-        bookEntity.setAuthor("宋更新");
-        bookEntity.setAuthorMajor(Consts.BookMajor.PHYSICS.getValue());
-        Result result = managerOperateService.addBook(bookEntity,userEntity);
-        System.out.println(result.isSuccess()+result.getMessage());
-        //System.out.println(bookRepository.findAll());
+        String bookName ="123|456";
+        System.out.println(BookName.getBookName(bookName));
+        System.out.println(BookName.getBookEnglishName(bookName));
+        bookName ="123";
+        System.out.println(BookName.getBookName(bookName));
+        System.out.println(BookName.getBookEnglishName(bookName));
     }
     @Test
     public void contextLoads(){
