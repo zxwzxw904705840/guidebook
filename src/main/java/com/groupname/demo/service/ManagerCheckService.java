@@ -70,8 +70,103 @@ public class ManagerCheckService {
     TODO:查询课件审核列表
      */
     /*
-    TODO:审核操作
+    TODO:课件审核
      */
+    /*
+    所有的审核操作
+     */
+    public Result review(ReviewEntity reviewEntity,boolean passed,UserEntity manager){
+        Result<ArrayList<ClassEntity>> result = checkUserPermission(manager);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if(reviewEntity==null){
+            return new Result(false,Consts.REVIEW_FAILED);
+        }
+        if(reviewEntity.getReviewObjectNo()==null||reviewEntity.getReviewObjectNo().equals("")){
+            return new Result(false,Consts.REVIEW_FAILED);
+        }
+        ReviewEntity review = reviewRepository.findByReviewObjectNo(reviewEntity.getReviewObjectNo());
+        if(review==null){
+            review.setReviewObjectNo(reviewEntity.getReviewObjectNo());
+            review.setReviewType(reviewEntity.getReviewType());
+            review.resetReviewNo();
+        }
+        review.setReviewer(manager);
+        switch (review.getReviewType()){
+            case 0://用户审核
+                UserEntity user = userRepository.findByUserNo(review.getReviewObjectNo());
+                if(user==null){
+                    return new Result(false,Consts.REVIEW_FAILED);
+                }
+                if(user.getUserStatus()!=Consts.Status.REVIEWING.getValue()){
+                    return new Result(false,Consts.STATUS_ERROR);
+                }
+                if(passed){
+                    user.setUserStatus(Consts.Status.NORMAL.getValue());
+                }else {
+                    user.setUserStatus(Consts.Status.REVIEW_FAILED.getValue());
+                }
+                userRepository.save(user);
+                reviewRepository.save(review);
+                return new Result(true,Consts.REVIEW_SUCCESS);
+            case 1://课程教参修改审核
+                ClassEntity classEntity=classRepository.findByClassNo(review.getReviewObjectNo());
+                if (classEntity == null) {
+                    return new Result(false,Consts.REVIEW_FAILED);
+                }
+                if(classEntity.getGuidebookStatus()!=Consts.Status.REVIEWING.getValue()){
+                    return new Result(false,Consts.STATUS_ERROR);
+                }
+                if(passed){
+                    classEntity.setGuidebookStatus(Consts.Status.NORMAL.getValue());
+                }else {
+                    classEntity.setGuidebookStatus(Consts.Status.REVIEW_FAILED.getValue());
+                }
+                classRepository.save(classEntity);
+                reviewRepository.save(review);
+                return new Result(true,Consts.REVIEW_SUCCESS);
+            case 2://课件审核
+                return new Result(false,Consts.PERMISSION_DENIED);
+            case 3://留言审核
+                MessageEntity message=messageRepository.findByMessageNo(review.getReviewObjectNo());
+                if(message==null||message.getMessageStatus()==Consts.Status.DELETED.getValue()){
+                    return new Result(false,Consts.REVIEW_FAILED);
+                }
+                if(message.getMessageStatus()!=Consts.Status.REVIEWING.getValue()){
+                    return new Result(false,Consts.STATUS_ERROR);
+                }
+                if(passed){
+                    message.setMessageStatus(Consts.Status.NORMAL.getValue());
+                }else {
+                    message.setMessageStatus(Consts.Status.REVIEW_FAILED.getValue());
+                }
+                messageRepository.save(message);
+                reviewRepository.save(review);
+                return new Result(true,Consts.REVIEW_SUCCESS);
+            case 4://采购申请审核
+                PurchaseEntity purchase=purchaseRepository.findByPurchaseNo(review.getReviewObjectNo());
+                if(purchase==null){
+                    return new Result(false,Consts.REVIEW_FAILED);
+                }
+                if(purchase.getPurchaseStatus()!=Consts.PurchaseStatus.REVIEWING.getValue()){
+                    return new Result(false,Consts.STATUS_ERROR);
+                }
+                if(passed){
+                    purchase.setPurchaseStatus(Consts.PurchaseStatus.PURCHASING.getValue());
+                }else {
+                    purchase.setPurchaseStatus(Consts.PurchaseStatus.REVIEW_FAILED.getValue());
+                }
+                purchaseRepository.save(purchase);
+                reviewRepository.save(review);
+                return new Result(true,Consts.REVIEW_SUCCESS);
+            default: return new Result(false,Consts.REVIEW_TYPE_ERROR);
+
+        }
+    }
+
+
+    @Deprecated
     public Result reviewMessage(String messageNo,boolean passed,UserEntity manager){
         Result<ArrayList<ClassEntity>> result = checkUserPermission(manager);
         if(!result.isSuccess()){

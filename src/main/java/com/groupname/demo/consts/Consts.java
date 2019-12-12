@@ -68,6 +68,9 @@ public class Consts {
     public static final String PURCHASE_FAILED="采购申请失败";
 
     public static final String REVIEW_SUCCESS="审核成功";
+    public static final String REVIEW_FAILED="审核失败";
+    public static final String REVIEW_TYPE_ERROR="审核类型错误";
+    public static final String STATUS_ERROR="状态错误";
 
     public enum Status{
             NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3),DEFAULT(4);
