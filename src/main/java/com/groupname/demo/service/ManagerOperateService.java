@@ -35,8 +35,29 @@ public class ManagerOperateService {
         if(!result.isSuccess()){
             return result;
         }
+        if(bookRepository.findByIsbn(book.getIsbn())!=null){
+            return new Result(false,Consts.BOOK_EXISTS);
+        }
         bookRepository.save(book);
         return new Result(true, Consts.ADD_BOOK_SUCCESS);
+    }
+    /*
+    修改图书信息
+     */
+    public Result updateBook(BookEntity book, UserEntity user){
+        Result result = checkUserPermission(user);
+        if(!result.isSuccess()){
+            return result;
+        }
+        result = checkBook(book);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if(bookRepository.findByIsbn(book.getIsbn())==null){
+            return new Result(false,Consts.BOOK_NOT_EXISTS);
+        }
+        bookRepository.save(book);
+        return new Result(true, Consts.UPDATE_BOOK_SUCCESS);
     }
     /*
     添加课程
@@ -184,9 +205,6 @@ public class ManagerOperateService {
          }
          if(book.getAuthorMajor()<0||book.getAuthorMajor()>=Consts.BookMajor.values().length){
              return new Result(false,Consts.AUTHOR_MAJOR_ERROR);
-         }
-         if(bookRepository.findByIsbn(book.getIsbn())!=null){
-             return new Result(false,Consts.BOOK_EXISTS);
          }
          return new Result(true,"");
      }

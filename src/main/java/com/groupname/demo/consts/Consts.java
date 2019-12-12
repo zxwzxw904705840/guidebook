@@ -36,6 +36,9 @@ public class Consts {
     public static final String ADD_BOOK_FAILED = "图书添加失败";
     public static final String AUTHOR_MAJOR_ERROR="专业领域错误";
     public static final String BOOK_EXISTS="图书已存在";
+    public static final String BOOK_NOT_EXISTS="图书不存在";
+    public static final String UPDATE_BOOK_FAILED = "图书修改失败";
+    public static final String UPDATE_BOOK_SUCCESS = "图书修改成功";
 
     public static final String COURSE_EXISTS="课程已存在";
     public static final String ADD_COURSE_SUCCESS="课程添加成功";

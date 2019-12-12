@@ -1,5 +1,7 @@
 package com.groupname.demo;
 
+import com.groupname.demo.consts.Consts;
+import com.groupname.demo.entity.BookEntity;
 import com.groupname.demo.entity.MessageEntity;
 import com.groupname.demo.entity.UserEntity;
 import com.groupname.demo.service.ManagerOperateService;
@@ -38,6 +40,16 @@ public class TestManagerOperate {
         userEntity.setUserNo("m10086");
         Result result;
         result = managerOperateService.deleteMessage("d5a4792aeb3785424d033a58ba2f87c8",userEntity);
+        System.out.println(result.isSuccess()+result.getMessage());
+        BookEntity bookEntity = new BookEntity();
+        bookEntity.setIsbn("9787040446081");
+        bookEntity.setPublishingHouse("高等教育出版社");
+        bookEntity.setPublishingData(2019);
+        bookEntity.setNumber(2147483647);
+        bookEntity.setBookName("大学物理");
+        bookEntity.setAuthor("宋更新2");
+        bookEntity.setAuthorMajor(Consts.BookMajor.PHYSICS.getValue());
+        result=managerOperateService.updateBook(bookEntity,userEntity);
         System.out.println(result.isSuccess()+result.getMessage());
     }
 
