@@ -67,6 +67,18 @@ public class ManagerUserService {
         if(!result.isSuccess()){
             return result;
         }
+        if(user==null){
+            return new Result<>(false,Consts.USERNO_NOT_EXISTS);
+        }
+        if(user.getUserNo()!=null&&user.getUserStatus()==Consts.Status.DELETED.getValue()){
+            UserEntity userEntity = userRepository.findByUserNo(user.getUserNo());
+            if(user==null){
+                return new Result<>(false,Consts.USERNO_NOT_EXISTS);
+            }
+            userEntity.setUserStatus(Consts.Status.DELETED.getValue());
+            userRepository.save(userEntity);
+            return new Result(true,Consts.UPDATE_USER_SUCCESS);
+        }
         result=checkUser(user);
         if(!result.isSuccess()){
             return result;
