@@ -30,7 +30,7 @@ public class ManagerCheckService {
         if(!result.isSuccess()){
             return result;
         }
-        ArrayList<UserEntity> userEntityArrayList = userRepository.findAllByUserStatus(Consts.Status.REVIEWING.getValue());
+        ArrayList<UserEntity> userEntityArrayList = userRepository.findAllByCharacters(Consts.UserType.TEACHER.getValue());
         return new Result<>(true,Consts.INQUIRE_SUCCESS,userEntityArrayList);
     }
     /*
@@ -52,7 +52,7 @@ public class ManagerCheckService {
         if(!result.isSuccess()){
             return result;
         }
-        ArrayList<PurchaseEntity> purchaseEntityArrayList = purchaseRepository.findAllByPurchaseStatus(Consts.PurchaseStatus.REVIEWING.getValue());
+        ArrayList<PurchaseEntity> purchaseEntityArrayList = purchaseRepository.findAll();
         return new Result<>(true,Consts.INQUIRE_SUCCESS,purchaseEntityArrayList);
     }
     /*

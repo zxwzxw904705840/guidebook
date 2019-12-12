@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface PurchaseRepository extends JpaRepository<PurchaseEntity,String> {
     PurchaseEntity findByPurchaseNo(String purchaseNo);
     ArrayList<PurchaseEntity> findAllByPurchaseStatus(Integer purchaseStatus);
+    ArrayList<PurchaseEntity> findAll();
 }
