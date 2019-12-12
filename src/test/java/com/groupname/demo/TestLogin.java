@@ -1,5 +1,6 @@
 package com.groupname.demo;
 
+import com.groupname.demo.consts.Consts;
 import com.groupname.demo.entity.MajorEntity;
 import com.groupname.demo.entity.UserEntity;
 import com.groupname.demo.service.LoginService;
@@ -18,13 +19,13 @@ public class TestLogin {
     @Test
     public void testRegister(){
         MajorEntity majorEntity = new MajorEntity();
-        majorEntity.setMajorNo("666669");
+        majorEntity.setMajorNo("66666");
         UserEntity userEntity = new UserEntity();
-        userEntity.setUserNo("t10089");
+        userEntity.setUserNo("s12345");
         userEntity.setPassword("123456");
-        userEntity.setUserName("我不想起名");
-        userEntity.setPhone("12345678905");
-        userEntity.setCharacters(1);
+        userEntity.setUserName("我不想起名了");
+        userEntity.setPhone("12345678906");
+        userEntity.setCharacters(Consts.UserType.STUDENT.getValue());
         userEntity.setMajor(majorEntity);
         Result result = loginService.register(userEntity);
         System.out.println(result.isSuccess() + result.getMessage());

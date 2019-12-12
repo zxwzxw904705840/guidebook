@@ -19,6 +19,8 @@ public class Consts {
     public static final String REGISTER_FAIL = "注册失败";
     public static final String ACCOUNT_CAN_USE = "账户可以使用";
     public static final String USER_CHARACTER_ERROR = "用户角色错误";
+    public static final String ILLEGAL_MAJOR = "非法的专业";
+    public static final String UPDATE_USER_SUCCESS = "用户修改成功";
 
     public static final String PERMISSION_DENIED = "权限不足";
     public static final String USERNO_NOT_EXISTS = "用户不存在";

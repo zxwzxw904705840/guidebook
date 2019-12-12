@@ -105,11 +105,11 @@ public class LoginService {
             return new Result<>(false,Consts.ILLEGAL_TELEPHONE);
         }
         UserEntity userEntity = userRepository.findByUserNo(user.getUserNo());
-        if(userEntity!=null && userEntity.getUserStatus()!=2){
+        if(userEntity!=null && userEntity.getUserStatus()==Consts.Status.NORMAL.getValue()){
             return new Result<>(false,Consts.USERNO_EXISTS);
         }
         if(user.getMajor()==null||user.getMajor().getMajorNo()==null||majorRepository.findByMajorNo(user.getMajor().getMajorNo())==null){
-            return new Result(false,Consts.REGISTER_FAIL);
+            return new Result(false,Consts.ILLEGAL_MAJOR);
         }
         return new Result<>(true,Consts.ACCOUNT_CAN_USE);
     }
