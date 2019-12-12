@@ -62,6 +62,8 @@ public class Consts {
     public static final String ADD_CLASS_FAILED="开课失败";
     public static final String COURSE_NOT_EXISTS="课程不存在";
     public static final String GUIDEBOOK_EXISTS="教参存在";//success=true
+    public static final String GUIDEBOOK_UPDATE_FAILED="教参修改失败";
+    public static final String GUIDEBOOK_UPDATE_WAITING_FOR_REVIEW="修改请求成功，等待审核";
 
     public static final String MESSAGE_CONTENT_IS_EMPTY="留言内容不能为空";
     public static final String ADD_MESSAGE_SUCCESS="留言成功";

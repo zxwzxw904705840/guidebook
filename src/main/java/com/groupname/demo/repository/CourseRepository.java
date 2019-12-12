@@ -12,4 +12,5 @@ public interface CourseRepository extends JpaRepository<CourseEntity,String> {
     ArrayList<CourseEntity> findAllByTerm(Integer term);
     ArrayList<CourseEntity> findAll();
     ArrayList<CourseEntity> findAllByCourseNameLike(String courseName);
+    ArrayList<CourseEntity> findAllByCourseEnglishNameLike(String courseEnglishName);
 }

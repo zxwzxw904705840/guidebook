@@ -27,7 +27,7 @@ public class ClassEntity {
     public String getClassNo() {
         return classNo;
     }
-    private void setClassNo(String classNo){
+    public void setClassNo(String classNo){
         this.classNo=classNo;
     }
     public void resetClassNo(){
