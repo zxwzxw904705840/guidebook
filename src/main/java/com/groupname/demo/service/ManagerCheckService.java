@@ -7,6 +7,7 @@ import com.groupname.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.ArrayList;
 
 @Service
@@ -21,6 +22,8 @@ public class ManagerCheckService {
     ClassRepository classRepository;
     @Autowired
     ReviewRepository reviewRepository;
+    @Autowired
+    FileRepository fileRepository;
 
     /*
     查询用户审核列表
@@ -67,11 +70,16 @@ public class ManagerCheckService {
         return new Result<>(true,Consts.INQUIRE_SUCCESS,classEntityArrayList);
     }
     /*
-    TODO:查询课件审核列表
+    查询课件审核列表
      */
-    /*
-    TODO:课件审核
-     */
+    public Result<ArrayList<FileEntity>> getFileReviewList(UserEntity manager){
+        Result<ArrayList<FileEntity>> result = checkUserPermission(manager);
+        if(!result.isSuccess()){
+            return result;
+        }
+        ArrayList<FileEntity> fileEntityArrayList = fileRepository.findAllByFileStatus(Consts.Status.REVIEWING.getValue());
+        return new Result<>(true,Consts.INQUIRE_SUCCESS,fileEntityArrayList);
+    }
     /*
     所有的审核操作
      */
@@ -128,7 +136,21 @@ public class ManagerCheckService {
                 reviewRepository.save(review);
                 return new Result(true,Consts.REVIEW_SUCCESS);
             case 2://课件审核
-                return new Result(false,Consts.PERMISSION_DENIED);
+                FileEntity file = fileRepository.findByFileNo(review.getReviewObjectNo());
+                if(file==null||file.getFileStatus()==Consts.Status.DELETED.getValue()){
+                    return new Result(false,Consts.REVIEW_FAILED);
+                }
+                if(file.getFileStatus()!=Consts.Status.REVIEWING.getValue()){
+                    return new Result(false,Consts.STATUS_ERROR);
+                }
+                if(passed){
+                    file.setFileStatus(Consts.Status.NORMAL.getValue());
+                }else {
+                    file.setFileStatus(Consts.Status.REVIEW_FAILED.getValue());
+                }
+                fileRepository.save(file);
+                reviewRepository.save(review);
+                return new Result(true,Consts.REVIEW_SUCCESS);
             case 3://留言审核
                 MessageEntity message=messageRepository.findByMessageNo(review.getReviewObjectNo());
                 if(message==null||message.getMessageStatus()==Consts.Status.DELETED.getValue()){

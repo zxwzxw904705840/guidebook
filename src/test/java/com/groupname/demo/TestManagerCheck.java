@@ -53,8 +53,8 @@ public class TestManagerCheck {
         reviewEntity.setReviewObjectNo("934a1889ec28314967929677caf8e24c");
         result = managerCheckService.review(reviewEntity,true,userEntity);
         System.out.println(result.isSuccess()+result.getMessage());
-        reviewEntity.setReviewType(Consts.ReviewType.USER_NO.getValue());
-        reviewEntity.setReviewObjectNo("t10086");
+        reviewEntity.setReviewType(Consts.ReviewType.FILE_NO.getValue());
+        reviewEntity.setReviewObjectNo("b6342a2dbb0fbc8c164b7479dff15f31");
         result = managerCheckService.review(reviewEntity,true,userEntity);
         System.out.println(result.isSuccess()+result.getMessage());
     }

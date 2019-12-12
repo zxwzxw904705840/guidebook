@@ -56,6 +56,7 @@ public class Consts {
     public static final String COURSE_TYPE_ERROR="课程类型错误";
     public static final String COURSE_TYPE_IS_EMPTY="课程类型不能为空";
     public static final String COURSE_MAJOR_NO_ERROR="可选专业号错误";
+    public static final String CLASS_NOT_EXISTS="课程不存在";
 
 
     public static final String ADD_CLASS_SUCCESS="开课成功";
@@ -80,6 +81,13 @@ public class Consts {
     public static final String REVIEW_FAILED="审核失败";
     public static final String REVIEW_TYPE_ERROR="审核类型错误";
     public static final String STATUS_ERROR="状态错误";
+
+    public static final String FILE_PATH="C:\\Users\\90470\\Desktop\\";
+
+    public static final String FILE_UPLOAD_SUCCESS="文件上传成功";
+    public static final String FILE_UPLOAD_FAILED="文件上传失败";
+    public static final String FILE_DOWNLOAD_SUCCESS="文件下载成功";
+    public static final String FILE_DOWNLOAD_FAILED="文件下载失败";
 
     public enum Status{
             NORMAL(0),REVIEWING(1),REVIEW_FAILED(2),DELETED(3),DEFAULT(4);
