@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Service
 public class FileService {
@@ -61,7 +62,7 @@ public class FileService {
             file.transferTo(dest);
             FileEntity fileEntity = new FileEntity();
             fileEntity.setClassEntity(classEntity);
-            fileEntity.setFilePath(Consts.FILE_PATH);
+            fileEntity.setFilePath(Consts.FILE_PATH+ fileName);
             fileEntity.resetFileNo();
             reviewRepository.save(new ReviewEntity(Consts.ReviewType.FILE_NO.getValue(),fileEntity.getFileNo()));
             fileRepository.save(fileEntity);
@@ -71,5 +72,25 @@ public class FileService {
         }
 
 
+    }
+
+    public Result<ArrayList<FileEntity>>getAllFileByClassNo(String classNo){
+        if(classNo==null){
+            return new Result<>(false,Consts.CLASS_NOT_EXISTS);
+        }
+        ClassEntity classEntity = new ClassEntity();
+        classEntity.setClassNo(classNo);
+        ArrayList<FileEntity> fileEntityArrayList= fileRepository.findAllByClassEntity(classEntity);
+        return new Result<>(true,Consts.INQUIRE_SUCCESS,fileEntityArrayList);
+    }
+    public Result<String> downloadFile(String fileNo){
+        if(fileNo==null){
+            return new Result<>(false,Consts.CLASS_NOT_EXISTS);
+        }
+        FileEntity fileEntity=fileRepository.findByFileNo(fileNo);
+        if(fileEntity==null||fileEntity.getFilePath()==null){
+            return new Result<>(false,Consts.FILE_DOWNLOAD_FAILED);
+        }
+        return new Result<>(true,Consts.FILE_UPLOAD_SUCCESS,fileEntity.getFilePath());
     }
 }

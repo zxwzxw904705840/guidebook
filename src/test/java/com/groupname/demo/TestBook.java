@@ -6,6 +6,7 @@ import com.groupname.demo.entity.UserEntity;
 import com.groupname.demo.repository.BookRepository;
 import com.groupname.demo.service.ManagerOperateService;
 import com.groupname.demo.utils.BookName;
+import com.groupname.demo.utils.FileName;
 import com.groupname.demo.utils.Result;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,8 @@ public class TestBook {
         bookName ="123";
         System.out.println(BookName.getBookName(bookName));
         System.out.println(BookName.getBookEnglishName(bookName));
+        String filePath="123\\456\\789";
+        System.out.println(FileName.getFileName(filePath));
     }
     @Test
     public void contextLoads(){

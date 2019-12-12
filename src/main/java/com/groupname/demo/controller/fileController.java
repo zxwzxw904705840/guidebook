@@ -4,6 +4,8 @@ import com.groupname.demo.consts.Consts;
 import com.groupname.demo.entity.ClassEntity;
 import com.groupname.demo.entity.UserEntity;
 import com.groupname.demo.service.FileService;
+import com.groupname.demo.utils.BookName;
+import com.groupname.demo.utils.FileName;
 import com.groupname.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 @Controller
 public class fileController {
@@ -59,5 +61,50 @@ public class fileController {
             return result.getMessage();
         }
         //return "doUploadFile";
+    }
+
+    @RequestMapping(value = "/doDownloadFile",method = RequestMethod.GET)
+    public String doDownloadFile(HttpServletRequest request, HttpServletResponse response){
+        Result<String> result = fileService.downloadFile("b6342a2dbb0fbc8c164b7479dff15f31");
+        if(result.isSuccess()){
+            String filePath = result.getObject();
+            String fileName = FileName.getFileName(filePath);
+            File file = new File(filePath);
+            response.setContentType("application/force-download");
+            response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null;
+            BufferedInputStream bis = null;
+            try {
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+                OutputStream outputStream = response.getOutputStream();
+                int i = bis.read(buffer);
+                while (i != -1) {
+                    outputStream.write(buffer, 0, i);
+                    i = bis.read(buffer);
+                }
+                System.out.println("下载成功");
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+        return "uploadFileTest";
     }
 }
