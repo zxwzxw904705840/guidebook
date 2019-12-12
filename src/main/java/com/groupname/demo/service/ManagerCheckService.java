@@ -88,6 +88,7 @@ public class ManagerCheckService {
         }
         ReviewEntity review = reviewRepository.findByReviewObjectNo(reviewEntity.getReviewObjectNo());
         if(review==null){
+            review = new ReviewEntity();
             review.setReviewObjectNo(reviewEntity.getReviewObjectNo());
             review.setReviewType(reviewEntity.getReviewType());
             review.resetReviewNo();
