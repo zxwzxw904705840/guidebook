@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestManagerUser {
@@ -26,6 +28,17 @@ public class TestManagerUser {
         System.out.println(result.isSuccess()+result.getMessage()+" "+result.getObject());
         result = managerUserService.getNormalUserByUserNoLike("",userEntity);
         System.out.println(result.isSuccess()+result.getMessage()+" "+result.getObject());
+    }
+    @Test
+    public void testManagerUserUpdate(){
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserNo("m10086");
+        Result<ArrayList<UserEntity>> result;
+        result=managerUserService.getNormalUserByCharacters(Consts.UserType.STUDENT.getValue(),userEntity);
+        UserEntity user = result.getObject().get(0);
+        user.setUserStatus(Consts.Status.DELETED.getValue());
+        result=managerUserService.updateNormalUser(user,userEntity);
+        System.out.println(result.isSuccess()+result.getMessage());
     }
     @Test
     public void contextLoads(){
