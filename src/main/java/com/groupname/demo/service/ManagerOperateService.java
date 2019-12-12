@@ -62,14 +62,17 @@ public class ManagerOperateService {
     /*
     添加课程
      */
-    public Result addCourse(CourseEntity course,UserEntity user){
-        Result result = checkUserPermission(user);
+    public Result addCourse(CourseEntity course,UserEntity manager){
+        Result result = checkUserPermission(manager);
         if(!result.isSuccess()){
             return result;
         }
         result = checkCourse(course);
         if(!result.isSuccess()){
             return result;
+        }
+        if(courseRepository.findByCourseNo(course.getCourseNo())!=null){
+            return new Result(false,Consts.COURSE_EXISTS);
         }
         courseRepository.save(course);
         return new Result(true,Consts.ADD_COURSE_SUCCESS);
@@ -134,8 +137,23 @@ public class ManagerOperateService {
         return new Result<>(true,Consts.INQUIRE_SUCCESS,courseEntityArrayList);
     }
     /*
-    TODO:修改课程信息，删除课程
+    修改课程信息
      */
+    public Result updateCourse(CourseEntity course,UserEntity manager){
+        Result result = checkUserPermission(manager);
+        if(!result.isSuccess()){
+            return result;
+        }
+        result = checkCourse(course);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if(courseRepository.findByCourseNo(course.getCourseNo())==null){
+            return new Result(false,Consts.COURSE_NOT_EXISTS);
+        }
+        courseRepository.save(course);
+        return new Result(true,Consts.UPDATE_COURSE_SUCCESS);
+    }
     /*
     查看留言
      */
@@ -241,9 +259,6 @@ public class ManagerOperateService {
         }
         if(course.getCourseType()==Consts.CourseType.PUBLIC_OBLIGATORY_COURSE.getValue()&&course.getMajor()!=null&&course.getMajor().getMajorNo()!=null){
             return new Result(false,Consts.COURSE_MAJOR_NO_ERROR);
-        }
-        if(courseRepository.findByCourseNo(course.getCourseNo())!=null){
-            return new Result(false,Consts.COURSE_EXISTS);
         }
         if(bookRepository.findByIsbn(course.getGuidebook().getIsbn())==null){
             return new Result(false,Consts.GUIDEBOOK_NOT_EXISTS_ERROR);

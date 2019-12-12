@@ -2,6 +2,7 @@ package com.groupname.demo;
 
 import com.groupname.demo.consts.Consts;
 import com.groupname.demo.entity.BookEntity;
+import com.groupname.demo.entity.CourseEntity;
 import com.groupname.demo.entity.MessageEntity;
 import com.groupname.demo.entity.UserEntity;
 import com.groupname.demo.service.ManagerOperateService;
@@ -43,13 +44,15 @@ public class TestManagerOperate {
         System.out.println(result.isSuccess()+result.getMessage());
         BookEntity bookEntity = new BookEntity();
         bookEntity.setIsbn("9787040446081");
-        bookEntity.setPublishingHouse("高等教育出版社");
-        bookEntity.setPublishingData(2019);
-        bookEntity.setNumber(2147483647);
-        bookEntity.setBookName("大学物理");
-        bookEntity.setAuthor("宋更新2");
+        CourseEntity courseEntity = new CourseEntity();
+        courseEntity.setCourseNo("c00003");
+        //courseEntity.setMajor(majorEntity);
+        courseEntity.setGuidebook(bookEntity);
+        courseEntity.setTerm(2);
+        courseEntity.setCourseEnglishName("daxuewulideyingwen");
+        courseEntity.setCourseName("大学物理(上)");
         bookEntity.setAuthorMajor(Consts.BookMajor.PHYSICS.getValue());
-        result=managerOperateService.updateBook(bookEntity,userEntity);
+        result=managerOperateService.updateCourse(courseEntity,userEntity);
         System.out.println(result.isSuccess()+result.getMessage());
     }
 

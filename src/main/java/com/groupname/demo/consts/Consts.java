@@ -43,6 +43,7 @@ public class Consts {
     public static final String COURSE_EXISTS="课程已存在";
     public static final String ADD_COURSE_SUCCESS="课程添加成功";
     public static final String ADD_COURSE_FAILED="课程添加失败";
+    public static final String UPDATE_COURSE_SUCCESS="课程修改成功";
     public static final String COURSE_NO_IS_EMPTY="课程号不能为空";
     public static final String COURSE_NAME_IS_EMPTY="课程名不能为空";
     public static final String TERM_IS_EMPTY="开课学期不能为空";
@@ -53,6 +54,7 @@ public class Consts {
     public static final String COURSE_TYPE_ERROR="课程类型错误";
     public static final String COURSE_TYPE_IS_EMPTY="课程类型不能为空";
     public static final String COURSE_MAJOR_NO_ERROR="可选专业号错误";
+
 
     public static final String ADD_CLASS_SUCCESS="开课成功";
     public static final String ADD_CLASS_FAILED="开课失败";
