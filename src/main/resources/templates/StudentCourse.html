@@ -87,7 +87,7 @@
                 </li>
                 <!-- ========== FULL WIDTH MEGAMENU END ==================-->
                 <!-- ========== Contact dropdown ==================-->
-                <li class="nav-item dropdown"><a href="/ManagerCheck-TeacherSign" data-toggle="dropdown" >&nbsp&nbsp个人主页&nbsp&nbsp<b class="caret"></b></a>
+                <li class="nav-item dropdown"><a href="javascript: void(0)" data-toggle="dropdown" >&nbsp&nbsp个人主页&nbsp&nbsp<b class="caret"></b></a>
                 </li>
                 <!-- ========== Contact dropdown end ==================-->
               </ul>
@@ -96,17 +96,17 @@
         </div>
       </header>
       <!-- Navbar End-->
-      
       <div id="heading-breadcrumbs">
         <div class="container">
           <div class="row d-flex align-items-center flex-wrap">
             <div class="col-md-7">
-              <h1 class="h2">管理员个人主页</h1>
+              <h1 class="h2">学生个人中心</h1>
             </div>
-
           </div>
         </div>
       </div>
+
+
       <section class="bar">
         <div class="container">
           <div class="row">
@@ -114,151 +114,161 @@
               <!-- MENUS AND WIDGETS -->
               <div class="panel panel-default sidebar-menu with-icons">
                 <div class="panel-heading">
-                  <h3 class="h4 panel-title">管理员</h3>
+                  <h3 class="h4 panel-title">学生</h3>
                 </div>
                 <div class="panel-body">
                   <ul class="nav nav-pills flex-column text-sm">
-						<li class="nav-item"><a href="/ShowTeacherSign" class="nav-link active">审核申请</a></li>
-						<li class="nav-item"><a href="/ShowCoursewareInfor" class="nav-link">教参管理</a></li>
-						<li class="nav-item"><a href="/ShowCourseInfor" class="nav-link">课程管理</a></li>
-						<li class="nav-item"><a href="/GetMessage" class="nav-link">留言栏管理</a></li>
-						<li class="nav-item"><a href="/ShowTeacherInfor" class="nav-link">用户管理</a></li>
-						<li class="nav-item"><a href="/ModifySelf" class="nav-link">修改资料</a></li>
-				  </ul>
+                    <li class="nav-item"><a href="StudentCourse.html" class="nav-link active">我的课程</a></li>
+                    <li class="nav-item"><a href="StudentInfor.html" class="nav-link">修改资料</a></li>
+                  </ul>
                 </div>
               </div>
             </div>
-              <div id="checkout" class="col-lg-9">
-              <div class="box">
-                <form method="get" action="shop-checkout4.html">
-                  <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item"><a href="/ShowTeacherSign" class="nav-link active"> <i class="fa fa-map-marker"></i><br>教师注册</a></li>
-                    <li class="nav-item"><a href="/ShowBookChange" class="nav-link"><i class="fa fa-truck"></i><br>教参修改</a></li>
-                    <li class="nav-item"><a href="/ShowCourseWare" class="nav-link"><i class="fa fa-money"></i><br>资料上传</a></li>
-					<li class="nav-item"><a href="/ShowBookBuy" class="nav-link"><i class="fa fa-money"></i><br>采购申请</a></li>
-                    <li class="nav-item"><a href="/ShowMessage" class="nav-link"><i class="fa fa-eye"></i><br>留言栏</a></li>
-                  </ul>
+            <div class="col-lg-9">
+              <div>
+                <form>
+                  <div class="input-group">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                      <a href="class-search.html">
+                        <button type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                      </a>
+                    </div>
+                  </div>
                 </form>
-                <div class="content">
+              </div>
+              <br>
+              <div id="customer-orders">
+                <div class="box mt-0 mb-lg-0">
                   <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
                         <tr>
-                          <th>注册者工号</th>
-                          <th>姓名</th>
-                          <th>电话</th>
-                          <th>专业领域</th>
-                          <th>审核状态</th>
-						  <th>操</th>
-                          <th>作</th>
+                          <th>课程代码</th>
+                          <th>课程名称</th>
+                          <th>教师信息</th>
+                          <th>开课学期</th>
+                          <th>课程类型</th>
+                          <th>课程简介</th>
+                          <th>相关教参</th>
+                          <th>相关课件</th>
                         </tr>
                       </thead>
                       <tbody>
-					    <!--
-                        <tr>
-                          <td>
-							<div>
-								<input type="submit" class="btn btn-link" th:name="10160405" data-toggle="modal" data-target="myModalOne"/>
-							</div>
-						  </td>
-                          <td>姓名</td>
-                          <td>2</td>
-                          <td>$123.00</td>
-                          <td>$0.00</td>
-                          <td>$246.00</td>
-                        </tr>
-                        <tr>
-                          <td><a href="#"><img src="img/basketsquare.jpg" alt="Black Blouse Armani"></a></td>
-                          <td><a href="#">Black Blouse Armani</a></td>
-                          <td>1</td>
-                          <td>$200.00</td>
-                          <td>$0.00</td>
-                          <td>$200.00</td>
-                        </tr>
-						-->
-						<tr th:each="i:${checkTeacher}">
-							<form action="/ShowTeacherSign" th:id="${i.userNo}">
-                                <input th:value="${i.userNo}" hidden="true" name="userno"/>
-								<td th:text="${i.userNo}"></td>
-								<td th:text="${i.userName}" name="username"></td>
-								<td th:text="${i.phone}"></td>						
-								<td th:text="${i.major}"></td>
-                                <div th:switch="${i.userStatus}">
-                                  <td th:case="0"><span class="badge badge-success">通过</span></td>
-                                  <td th:case="1"><span class="badge badge-info">正在审核</span></td>
-                                  <td th:case="2"><span class="badge badge-danger">不通过</span></td><!--document.getElementById(this.name).value-->
-                                  <td th:case="3"><span>已删除</span></td>
-                                </div>
-								<td>
-                                  <input type="submit" th:id="${i.userNo}" th:name="${i.userNo}"  onclick="ButtonRecieved()" class="btn btn-template-main" value="通过">
-                                    <!--input type="submit" th:id="${i.userNo}" th:name="${i.userNo}" th:onclick="ButtonRecieved(this.id)" class="btn btn-template-main" value="通过"></input-->
-                                      <script language="javascript">
-                                        function ButtonRecieved()
-                                        {
-                                            alert("确认审核通过");
-                                        }
-                                      </script>
-                                </td>
-                                </form>
-                                <form action="/CancelTeacherSign">
-                                <td>
-                                    <input th:value="${i.userNo}" hidden="true" name="userno"/>
-									<button type="submit" onclick="ButtonCancelled()" class="btn btn-secondary mt-0">拒绝</button>
-                                      <script language="javascript">
-                                        function ButtonCancelled()
-                                        {
-                                            alert("确认审核拒绝");
-                                        }
-                                      </script>
-								</td>
-                                </form>
+                        <tr th:each="i:&{studentrCourseInfor}"><!--ClassEntity-->
+                          <form action="/ShowStudentCourseInfor">
+                            <th th:text="${i.course.courseNo}"></th>
+                            <td th:text="${i.course.courseName}"></td>
 
-						</tr>
-                      </tbody>
-                      <!--
-                      <tfoot>
-                        <tr>
-                          <form action="/FigureUndo">
-								<th colspan="4"></th>
-								<td>未处理：</td>
-								<td th:text="${undoNumber}"></td>
-							</form>
+                              <td style="text-align:center"><a href="#popup5" class="btn btn-template-outlined btn-sm">详情</a>
+                                <div class="popup" id="popup5">
+                                  <div class="popup-inner">
+                                    <div class="popup__top"><h3>教师信息</h3></div>
+                                    <div id="customer-orders">
+                                        <div class="box mt-0 mb-lg-0">
+                                          <div class="table-responsive">
+                                            <table class="table table-hover">
+                                              <thead>
+                                                <tr>
+                                                  <th>教师姓名</th>
+                                                  <th>E-mail</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                    <td th:text="${i.teacher.userName}"></td>
+                                                    <td th:text="${i.teacher.email}"></td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <a class="popup__close" href="#">X</a>
+                                  </div>
+                                </div>
+                              </td>
+
+                            <td th:text="${i.course.term}"></td>
+                            <td th:text="${i.course.courseType}"></td>
+
+                            <td style="text-align:center"><a href="#popup2" class="btn btn-template-outlined btn-sm">详情</a>
+                              <div class="popup" id="popup2">
+                                <div class="popup-inner">
+                                  <div class="popup__top"><h3>课程简介详情</h3></div>
+                                  <div class="popup__text" th:text="${i.course.introduction}">
+                                  </div>
+                                  <a class="popup__close" href="#">X</a>
+                                </div>
+                              </div>
+                            </td>
+
+                            <td style="text-align:center"><a href="#popup1" class="btn btn-template-outlined btn-sm">详情</a>
+                              <div class="popup" id="popup1">
+                                <div class="popup-inner">
+                                  <div class="popup__top"><h3>相关教参</h3></div>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <img th:src="{i.guidebook.titlePage}">
+                                    </div>
+                                    <div class="col-md-6">
+                                      <p th:text="${i.guidebook.isbn}"></p>
+                                      <h6 th:text="${i.guidebook.bookName}"></h6>
+                                      <p th:text="${i.guidebook.author}"></p>
+                                      <div class="row">
+                                        <p class="buttons"  style="margin-left: 100px;"><a th:href="${i.guidebook.informationUrl}" class="btn btn-template-outlined btn-sm"><font size="1">详情</font></a><a th:href="${i.guidebook.contentUrl}" class="btn btn-template-outlined btn-sm"><font size="1">全文</font></a></p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <a class="popup__close" href="#">X</a>
+                                </div>
+                              </div>
+                            </td>
+
+                            <td style="text-align:center"><a href="#popup3" class="btn btn-template-outlined btn-sm">详情</a>
+                              <div class="popup" id="popup3">
+                                <div class="popup-inner">
+                                  <div class="popup__top"><h3>相关课件</h3></div>
+                                  <div id="customer-orders">
+                                      <div class="box mt-0 mb-lg-0">
+                                        <div class="table-responsive">
+                                          <table class="table table-hover">
+                                            <thead>
+                                              <tr>
+                                                <th>课件名称</th>
+                                                <th>点击下载</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                  <td th:text="${i.FileNo}"></td>
+                                                  <td style="text-align:center"><a th:href="${i.filePath}" class="btn btn-template-outlined btn-sm">下载</a></td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  <a class="popup__close" href="#">X</a>
+                                </div>
+                              </div>
+                            </td>
+                          </form>
                         </tr>
-                      </tfoot>
-                      -->
+                      </tbody>
                     </table>
                   </div>
                 </div>
-				<!--要删掉的东西-->
-                <div class="box-footer d-flex flex-wrap align-items-center justify-content-between">
-                  <div class="left-col">
-				    <!--
-					<a href="shop-checkout3.html" class="btn btn-secondary mt-0"><i class="fa fa-chevron-left"></i>Back to payment method</a>
-					-->
-				 </div>
-				  <div class="right-col">
-					<a href="/ShowTeacherSign" class="btn btn-template-main">刷新<i class="fa fa-chevron-right"></i></a>
-                  </div>
-                </div>
-				<!--要删掉的东西-->
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-	    
-	  
-      <!-- GET IT-->
-      <div class="get-it">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 text-center p-3">
-              <h3>Do you want cool website like this one?</h3>
             </div>
-            <div class="col-lg-4 text-center p-3">   <a href="#" class="btn btn-template-outlined-white">Buy this template now</a></div>
           </div>
-        </div>
-      </div>
+      </section>
+
+
+
+
+
       <!-- FOOTER -->
       <footer class="main-footer">
         <div class="container">

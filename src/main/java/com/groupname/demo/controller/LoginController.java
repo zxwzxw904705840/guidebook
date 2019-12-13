@@ -45,8 +45,12 @@ public class LoginController {
         /*String userNo = params.get("userNo").toString();
         String password = params.get("password").toString();
         Result result = loginService.Login(userNo,password);*/
+
         return ResponseEntity.ok(result);
+
     }
+
+
 
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String register(HttpServletRequest request){

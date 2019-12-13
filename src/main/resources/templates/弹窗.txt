@@ -1,0 +1,30 @@
+<td style="text-align:center"><a href="#popup1" class="btn btn-template-outlined btn-sm">详情</a>
+                              <div class="popup" id="popup1">
+                                <div class="popup-inner">
+                                  <div class="popup__top"><h3>可选专业详情</h3></div>
+                                  <div id="customer-orders">
+                                      <div class="box mt-0 mb-lg-0">
+                                        <div class="table-responsive">
+                                          <table class="table table-hover">
+                                            <thead>
+                                              <tr>
+                                                <th>专业号</th>
+                                                <th>专业名称</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr th:each="a:{MajorInfor}">
+                                                <form action="/ShowMajorInfor">
+                                                  <td th:text="${a.MajorNo}"></td>
+                                                  <td th:text="${a.MajorName}"></td>
+                                                </form>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    <a class="popup__close" href="#">X</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>

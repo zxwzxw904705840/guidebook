@@ -21,8 +21,10 @@ public class TestBook {
     ManagerOperateService managerOperateService;
     @Test
     public void testBookRepository(){
-        String bookName ="123|456";
-        System.out.println(BookName.getBookName(bookName));
+        String bookName ="123|a456";
+       // System.out.println(BookName.getBookName(bookName));
+        String titleName=BookName.getBookName(bookName);
+        System.out.println(titleName.charAt(0));
         System.out.println(BookName.getBookEnglishName(bookName));
         bookName ="123";
         System.out.println(BookName.getBookName(bookName));

@@ -160,25 +160,21 @@
                       <tr th:each="i:${coursewareInfor}">
 						<form action="/ShowCoursewareInfor" id="form1">
 							<td><a href="#"><img src="img/basketsquare.jpg" alt="Black Blouse Armani" class="img-fluid"></a></td>
-                            <td><input th:value="${i.bookName}" name="bookname"/></td>
-							<td><input th:value="${i.isbn}" name="isbn"/></td>
-                            <td>
-                              <select id="inline_major" name="major">
-                                <option value="math">数学类</option>
-                                <option value="cs">计算机类</option>
-                                <option value="chemistry">化学类</option>
-                                <option value="physics">物理学类</option>
-                                <option value="humanities">人文学科类</option>
-                                <option value="art">艺术学科类</option>
-                              </select>
-                            </td>
-							<td><input th:value="${i.number}" name="number" style="padding-left=-20px;width: 75px;"/></td>
+                            <td th:text="${i.bookName}"><a href="#"></a></td>
+							<td th:text="${i.isbn}"></td>
+                            <div th:switch="${i.authorMajor}">
+                              <td th:case="0">数学类</td>
+                              <td th:case="1">计算机类</td>
+                              <td th:case="2">化学类</td>
+                              <td th:case="3">物理学类</td>
+                              <td th:case="4">人文学科类</td>
+                              <td th:case="5">艺术学科类</td>
+                            </div>
+							<td th:text="${i.number}"></td>
                           <td>
-                            <input type="submit" class="btn btn-template-outlined btn-sm" value="修改"/>
                             <!--button type="submit" href="#popop1" class="btn btn-template-outlined btn-sm">修改</button-->
-                            <!--a href="#popup1" class="btn btn-template-outlined btn-sm">修改</a-->
+                            <a href="#popup1" class="btn btn-template-outlined btn-sm">修改</a>
                             <!--弹窗测试-->
-                            <!--
                             <div class="popup" id="popup1">
                               <div class="popup-inner">
                                 <div class="popup__top"><center><h3>修改教参资料</h3></center></div>
@@ -220,7 +216,7 @@
                                         </table>
                                         <center>
                                           <input type="submit" id="submitUpdate" onclick="submitForm2()" value="更新" class="btn btn-template-main"/>
-
+                                          <!--button type="submit" class="btn btn-secondary mt-0">取消</button-->
                                         </center>
                                       </form>
 
@@ -232,7 +228,6 @@
                               </div>
                             </div>
                             <link rel="stylesheet" href="../css/style.popup.css">
-                            -->
                             <!--弹窗测试结束-->
                             <button type="submit" onclick="ButtonDeleted()" class="btn btn-template-outlined btn-sm">删除</button>
                             <script language="javascript">
@@ -287,12 +282,12 @@
                 </div>
                 <div class="panel-body">
                   <ul class="nav nav-pills flex-column text-sm">
-                    <li class="nav-item"><a href="/ShowCoursewareInfor" class="nav-link active">全部</a></li>
+                    <li class="nav-item"><a href="/ShowCoursewareInfor" class="nav-link">全部</a></li>
                     <li class="nav-item"><a href="/ShowCoursewareInfor_Maths" class="nav-link">数学类</a></li>
                     <li class="nav-item"><a href="/ShowCoursewareInfor_CS" class="nav-link">计算机类</a></li>
                     <li class="nav-item"><a href="/ShowCoursewareInfor_Chemistry" class="nav-link">化学类</a></li>
                     <li class="nav-item"><a href="/ShowCoursewareInfor_Physics" class="nav-link">物理学类</a></li>
-                    <li class="nav-item"><a href="/ShowCoursewareInfor_Human" class="nav-link">人文学科类</a></li>
+                    <li class="nav-item"><a href="/ShowCoursewareInfor_Human" class="nav-link active">人文学科类</a></li>
                     <li class="nav-item"><a href="/ShowCoursewareInfor_Art" class="nav-link">艺术学科类</a></li>
                   </ul>
                 </div>

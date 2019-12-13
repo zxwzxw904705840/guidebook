@@ -11,6 +11,23 @@ import java.util.Date;
 public class PurchaseEntity {
     private String purchaseNo;
     private UserEntity purchaser;
+
+    /*
+    private String userNo;
+    public String getUserNo(){
+        return purchaser.getUserNo();
+    }
+
+    private String userName;
+    public String getUserName(){
+        return purchaser.getUserName();
+    }
+
+    private String isbn;
+    public String getIsbn(){
+        return book.getIsbn();
+    }*/
+
     private BookEntity book;
     private Integer number;
     private Integer purchaseStatus;
